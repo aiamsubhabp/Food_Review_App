@@ -31,15 +31,16 @@ class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key = True)
-    rating = db.Column(db.String)
+    rating = db.Column(db.Integer)
     review = db.Column(db.String)
     image = db.Column(db.String, nullable = True)
 
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
 
-    customer = db.relationship('User', back_populates = 'reviews')
+    customer = db.relationship('Customer', back_populates = 'reviews')
     restaurant = db.relationship('Restaurant', back_populates = 'reviews')
 
     def __repr__(self):
         return f'<Review {self.id}, {self.rating}, {self.review}, {self.customer.username}, {self.restaurant.name}>'
+    
