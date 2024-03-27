@@ -6,6 +6,8 @@ from config import db
 class Customer(db.Model, SerializerMixin):
     __tablename__ = 'customers'
 
+    serialize_rules = ('-reviews.customer',)
+
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String, unique = True, nullable = False)
 
@@ -16,6 +18,8 @@ class Customer(db.Model, SerializerMixin):
 
 class Restaurant(db.Model, SerializerMixin):
     __tablename__ = 'restaurants'
+
+    serialize_rules = ('-reviews.restaurant',)
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
@@ -29,6 +33,8 @@ class Restaurant(db.Model, SerializerMixin):
 
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
+
+    serialize_rules = ('-customer.reviews', '-restaurant.reviews')
 
     id = db.Column(db.Integer, primary_key = True)
     rating = db.Column(db.Integer)
