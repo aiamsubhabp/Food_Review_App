@@ -47,5 +47,40 @@ class Reviews(Resource):
     
 api.add_resource(Reviews, '/api/reviews')
 
+class ReviewById(Resource):
+  def get(self, id):
+    review = Review.query.filter(Review.id == id).first()
+    if not review:
+      return ('Review not found, 404')
+    
+    review_dict = review.to_dict()
+
+    return make_response(jsonify(review_dict), 200)
+  
+  def patch(self, id):
+    review = Review.query.filter(Review.id == id).first()
+    if not review:
+      return ('Review not found', 404)
+    
+    try:
+      data = request.get_json()
+      for attr in data:
+        setattr(review, attr, data[attr])
+      db.session.add(review)
+      db.session.commit()
+      return make_response(review.to_dict(), 202)
+    except:
+      return ('Failed to update review', 400)
+    
+  def delete(self, id):
+    review = Review.query.filter(Review.id == id).first()
+    if not review:
+      return ('Review not found', 404)
+    db.session.delete(review)
+    db.session.commit()
+    return ('Review successfully deleted', 204)
+  
+api.add_resource(ReviewById, '/api/reviews/<int:id>')
+
 if __name__ == "__main__":
   app.run(port=5555, debug=True)

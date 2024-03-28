@@ -39,7 +39,7 @@ class Review(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     rating = db.Column(db.Integer)
     review = db.Column(db.String)
-    image = db.Column(db.String, nullable = True)
+    image = db.Column(db.String, default = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png')
 
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
