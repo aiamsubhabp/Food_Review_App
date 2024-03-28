@@ -1,5 +1,4 @@
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.hybrid import hybrid_property
 
 from config import db
 
@@ -24,6 +23,7 @@ class Restaurant(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     cuisine_type = db.Column(db.String)
+    image = db.Column(db.String)
 
     reviews = db.relationship('Review', back_populates = 'restaurant')
 

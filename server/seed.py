@@ -17,9 +17,9 @@ if __name__ == "__main__":
     db.session.add_all([c1, c2, c3])
     db.session.commit()
 
-    r1 = Restaurant(name = 'Koopa Kitchen', cuisine_type = 'Bold and flavorful dishes with a hint of spiciness, inspired by Koopa Troopa culture.')
-    r2 = Restaurant(name = 'Bowser BBQ', cuisine_type = 'Hearty barbecue dishes with a fiery kick, featuring grilled meats and savory sides.')
-    r3 = Restaurant(name = 'Shy Guy Sushi', cuisine_type = 'Creative and artfully presented sushi rolls, sashimi, and Japanese-inspired small plates.')
+    r1 = Restaurant(name = 'Koopa Kitchen', cuisine_type = 'Bold and flavorful dishes with a hint of spiciness, inspired by Koopa Troopa culture.', image = 'https://tildaricelive.s3.eu-central-1.amazonaws.com/wp-content/uploads/2022/04/22154754/Chill-bowl-edit.jpg')
+    r2 = Restaurant(name = 'Bowser BBQ', cuisine_type = 'Hearty barbecue dishes with a fiery kick, featuring grilled meats and savory sides.', image = 'https://foodcnr.com/wp-content/uploads/2018/05/Summer-BBQ.jpg')
+    r3 = Restaurant(name = 'Shy Guy Sushi', cuisine_type = 'Creative and artfully presented sushi rolls, sashimi, and Japanese-inspired small plates.', image = 'https://ik.imagekit.io/awwybhhmo/satellite_images/japanese/beyondmenu/hero/16.jpg?tr=w-3840,q-50')
 
     db.session.add_all([r1, r2, r3])
     db.session.commit()

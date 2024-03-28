@@ -12,6 +12,18 @@ class Customers(Resource):
     customers_dict = [customer.to_dict() for customer in customers]
     return customers_dict, 200
   
+  def post(self):
+    data = request.get_json()
+    new_customer = Customer(
+      username = data['username']
+    )
+    try:
+      db.session.add(new_customer)
+      db.session.commit()
+      return (new_customer.to_dict(), 201)
+    except:
+      return ('Failed to create customer', 404)
+    
 api.add_resource(Customers, '/api/customers')
 
 class Restaurants(Resource):
@@ -19,6 +31,19 @@ class Restaurants(Resource):
     restaurants = Restaurant.query.all()
     resturants_dict = [restaurant.to_dict() for restaurant in restaurants]
     return resturants_dict, 200
+  
+  def post(self):
+    data = request.get_json()
+    new_restaurant = Restaurant(
+      name = data['name'],
+      cuisine_type = data['cuisine_type']
+    )
+    try:
+      db.session.add(new_restaurant)
+      db.session.commit()
+      return (new_restaurant.to_dict(), 201)
+    except:
+      return ('Failed to create restaurant', 404)
 
 api.add_resource(Restaurants, '/api/restaurants')
 
